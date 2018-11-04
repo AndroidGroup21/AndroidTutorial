@@ -17,6 +17,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -89,6 +90,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         if (list.size() > 0) {
             Address address = list.get(0);
 
+            String format_address = address.getLocality();
             Log.d(TAG, "geoLocate: found a location: " + address.toString());
             LatLng location = new LatLng(address.getLatitude(), address.getLongitude());
             mMap.addMarker(new MarkerOptions().position(location).title("Found Location"));
@@ -102,6 +104,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                     .tilt(40)                   // Sets the tilt of the camera to 30 degrees
                     .build();                   // Creates a CameraPosition from the builder
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            Toast.makeText(this,format_address,Toast.LENGTH_SHORT).show();
         }
 
         cur = this;
@@ -144,6 +147,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 if (list.size() > 0) {
                     Address address = list.get(0);
 
+                    String format_address = address.getSubAdminArea();
                     Log.d(TAG, "geoLocate: found a location: " + address.toString());
                     LatLng location = new LatLng(address.getLatitude(), address.getLongitude());
                     mMap.addMarker(new MarkerOptions().position(location).title("Found Location"));
